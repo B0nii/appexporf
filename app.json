@@ -1,0 +1,17 @@
+{
+  "name": "radioformulaexp",
+  "displayName": "radioformulaexp",
+  "expo": {
+    "name": "radioformulaexp",
+    "slug": "radioformulaexp",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
