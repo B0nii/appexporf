@@ -2,22 +2,56 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 import { MonoText } from '../components/StyledText';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/react-hooks';
+
+const GET_POSTS = gql`
+query {
+  posts {
+    edges {
+      node {
+        id
+        title
+        content
+        date
+          featuredImage {
+          mediaItemUrl
+        }
+      }
+    }
+  }
+}
+`;
 
 export default function HomeScreen () {
+  const { loading, error, data } = useQuery( GET_POSTS );
+
   return (
+
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
-          {/*           <Image
-            source={
-              __DEV__
-                ? require( '../assets/images/robot-dev.png' )
-                : require( '../assets/images/robot-prod.png' )
-            }
-            style={styles.welcomeImage}
-          /> */}
+          {
+            ( data && data.posts )
+              ? data.posts.edges.map( ( { node } ) => (
+                <Card key={node.id}>
+                  <CardImage
+                    source={{ uri: node.featuredImage != null ? node.featuredImage.mediaItemUrl : "https://x.kinja-static.com/assets/images/logos/placeholders/default.png" }}
+                    title={node.title}
+
+                  />
+
+                  <CardContent text="" />
+                </Card>
+              ) )
+              :
+              <View>
+                <Text>NO HAY DATOS</Text>
+              </View>
+          }
+
         </View>
 
 

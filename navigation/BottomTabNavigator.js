@@ -6,7 +6,14 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import Noticias from '../screens/Noticias';
 import Podcast from '../screens/Podcast';
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 
+const client = new ApolloClient(
+  {
+    uri: 'https://testdo.radioformula.com.mx/graphql',
+  }
+);
 const BottomTab = createBottomTabNavigator();
 const INITIAL_ROUTE_NAME = 'Home';
 
@@ -17,40 +24,44 @@ export default function BottomTabNavigator ( { navigation, route } ) {
   navigation.setOptions( { headerTitle: getHeaderTitle( route ) } );
 
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-      <BottomTab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          title: 'Inicio',
-          tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-home" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Links"
-        component={LinksScreen}
-        options={{
-          title: 'En Vivo',
-          tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-radio" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Noticias"
-        component={Noticias}
-        options={{
-          title: 'Noticias',
-          tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-paper" />,
-        }}
-      />
-      <BottomTab.Screen
-        name="Podcast"
-        component={Noticias}
-        options={{
-          title: 'Podcast',
-          tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-mic" />,
-        }}
-      />
-    </BottomTab.Navigator >
+    <ApolloProvider client={client}>
+
+      <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+        <BottomTab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            title: 'Inicio',
+            tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-home" />,
+          }}
+        />
+        <BottomTab.Screen
+          name="Links"
+          component={LinksScreen}
+          options={{
+            title: 'En Vivo',
+            tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-radio" />,
+          }}
+        />
+        <BottomTab.Screen
+          name="Noticias"
+          component={Noticias}
+          options={{
+            title: 'Noticias',
+            tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-paper" />,
+          }}
+        />
+        <BottomTab.Screen
+          name="Podcast"
+          component={Noticias}
+          options={{
+            title: 'Podcast',
+            tabBarIcon: ( { focused } ) => <TabBarIcon focused={focused} name="md-mic" />,
+          }}
+        />
+      </BottomTab.Navigator >
+    </ApolloProvider>
+
   );
 }
 
