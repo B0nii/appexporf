@@ -1,17 +1,29 @@
 {
-  "name": "radioformulaexp",
-  "displayName": "radioformulaexp",
   "expo": {
-    "name": "radioformulaexp",
-    "slug": "radioformulaexp",
-    "version": "1.0.0",
+    "name": "rfexpoapp",
+    "slug": "rfexpoapp",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "myapp",
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
   }
 }
