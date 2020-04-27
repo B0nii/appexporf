@@ -30,7 +30,7 @@ function OptionButton ( { icon, label, onPress, isLastOption } ) {
 const styles = StyleSheet.create( {
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: '#131721',
   },
   contentContainer: {
     paddingTop: 15,

@@ -2,7 +2,7 @@ import * as WebBrowser from 'expo-web-browser';
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
+import { CardContent, CardImage } from 'react-native-material-cards'
 import { MonoText } from '../components/StyledText';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
@@ -36,15 +36,13 @@ export default function HomeScreen () {
           {
             ( data && data.posts )
               ? data.posts.edges.map( ( { node } ) => (
-                <Card key={node.id}>
+                <CardContent key={node.id}>
                   <CardImage
                     source={{ uri: node.featuredImage != null ? node.featuredImage.mediaItemUrl : "https://x.kinja-static.com/assets/images/logos/placeholders/default.png" }}
                     title={node.title}
 
                   />
-
-                  <CardContent text="" />
-                </Card>
+                </CardContent>
               ) )
               :
               <View>
@@ -108,7 +106,7 @@ function handleHelpPress () {
 const styles = StyleSheet.create( {
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#131721',
   },
   developmentModeText: {
     marginBottom: 20,

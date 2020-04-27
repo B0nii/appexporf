@@ -26,7 +26,14 @@ export default function BottomTabNavigator ( { navigation, route } ) {
   return (
     <ApolloProvider client={client}>
 
-      <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
+      <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}
+        tabBarOptions={{
+          activeTintColor: '#08f',
+          style: {
+            backgroundColor: '#000000',
+          }
+
+        }} >
         <BottomTab.Screen
           name="Home"
           component={HomeScreen}

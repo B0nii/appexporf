@@ -1,37 +1,42 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
 
-export default function LinksScreen () {
-  return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-      <Text>ENVIVO</Text>
+class LinksScreen extends Component {
 
-    </ScrollView>
-  );
+
+  componentDidMount () {
+    fetch( 'http://testdo.radioformula.com.mx/envivo/api/programacion-estacion-actual/1' )
+      .then( response => {
+        return response.json();
+      } )
+      .then( response => {
+        console.log( response );
+
+      } )
+  }
+  render () {
+    return (
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+        <Text>ENVIVO</Text>
+
+      </ScrollView>
+    );
+  }
 }
 
-function OptionButton ( { icon, label, onPress, isLastOption } ) {
-  return (
-    <RectButton style={[ styles.option, isLastOption && styles.lastOption ]} onPress={onPress}>
-      <View style={{ flexDirection: 'row' }}>
-        <View style={styles.optionIconContainer}>
-          <Ionicons name={icon} size={22} color="rgba(0,0,0,0.35)" />
-        </View>
-        <View style={styles.optionTextContainer}>
-          <Text style={styles.optionText}>{label}</Text>
-        </View>
-      </View>
-    </RectButton>
-  );
-}
+
+
+export default LinksScreen;
+
+
 
 const styles = StyleSheet.create( {
   container: {
     flex: 1,
-    backgroundColor: '#fafafa',
+    backgroundColor: '#131721',
   },
   contentContainer: {
     paddingTop: 15,
